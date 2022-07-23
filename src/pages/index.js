@@ -1,3 +1,7 @@
+// Import Components
+
+// Import Custom Hooks
+import Layout from 'containers/Layout'
 import { useUserCtx } from 'hooks/useUserCtx'
 
 import Head from 'next/head'
@@ -6,12 +10,11 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
 
-  const { user, setUser, session, setSession } = useUserCtx()
+  const { user, session } = useUserCtx()
 
-  console.log('user', user)
-  console.log('setUser', setUser)
-  console.log('session', session)
-  console.log('setSession', setSession)
+  console.log(user)
+  console.log(session)
+
 
   return (
     <div className={styles.container}>
@@ -21,11 +24,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <Layout>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
-      </main>
+      </Layout>
+
 
     </div>
   )
