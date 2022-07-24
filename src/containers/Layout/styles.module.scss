@@ -1,4 +1,4 @@
-@use "../../styles/_vars.scss" as v;
+@use "styles/_vars.scss" as v;
 @use "sass:map";
 
 $breakpoint: map.get(v.$breackpoints, "sm");
@@ -10,6 +10,7 @@ $breakpoint: map.get(v.$breackpoints, "sm");
   height: 100vh;
   width: 100%;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 @media (min-width: $breakpoint) {

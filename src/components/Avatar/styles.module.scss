@@ -1,5 +1,16 @@
+@use 'styles/_vars' as v;
+
+.container {
+  display: flex;
+  align-items: center;
+}
 .avatar {
   border-radius: 99.99rem;
   height: 4.9rem;
   width: 4.9rem;
+  background: rgba(v.$black, .3);
+}
+
+.avatar + strong {
+  margin-left: 0.8rem;
 }

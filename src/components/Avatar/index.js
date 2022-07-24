@@ -1,10 +1,11 @@
 import styles from './styles.module.scss'
 
-const Avatar = ({ src, alt }) => {
+const Avatar = ({ src, alt, text, withText }) => {
   return (
-    <>
-      <img className={styles.className} src={src} alt={alt} title={alt} />
-    </>
+    <div className={styles.container}>
+      <img className={styles.avatar} src={src} alt={alt} title={alt} />
+      {withText && <strong>{text || alt}</strong>}
+    </div>
   )
 }
 

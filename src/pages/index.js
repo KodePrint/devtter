@@ -1,13 +1,14 @@
+import Image from 'next/image'
+import Head from 'next/head'
 // Import Components
+import { Github } from 'components/icons/Github'
+import Avatar from 'components/Avatar'
+import Button from 'components/Button'
+import Layout from 'containers/Layout'
 
 // Import Custom Hooks
-import Button from 'components/Button'
-import { Github } from 'components/icons/Github'
-import Layout from 'containers/Layout'
 import { useUserCtx } from 'hooks/useUserCtx'
 
-import Head from 'next/head'
-import Image from 'next/image'
 // Import Styles
 import styles from 'styles/index.module.scss'
 
@@ -31,16 +32,20 @@ export default function Home() {
             Talk about develpment <br /> with developers 👨‍💻💻🖥👩‍💻
           </h2>
           <div>
-            {session === null && (
+            {user === null && (
               <Button onClick={() => alert('GithubLogin')}>
                 <Github fill="#fdfdfd" width={24} height={24} />
                 Login with Github
               </Button>
             )}
-            {session === true && (
+            {user && user.avatar_url && (
               <div>
-                <img src={user.avatar_url} />
-                <strong>{user.user_name}</strong>
+                <Avatar
+                  src={user.avatar_url}
+                  alt={user.user_name}
+                  text={user.user_name}
+                  withText
+                />
               </div>
             )}
           </div>
