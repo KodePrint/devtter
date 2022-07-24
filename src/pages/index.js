@@ -11,13 +11,11 @@ import Image from 'next/image'
 // Import Styles
 import styles from 'styles/index.module.scss'
 
-export default function Home () {
+export default function Home() {
   const { user, session } = useUserCtx()
 
   console.log(user)
   console.log(session)
-
-  const a = ''
 
   return (
     <>

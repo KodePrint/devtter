@@ -1,27 +1,28 @@
 const RULES = {
   OFF: 'off',
   ERROR: 'error',
-  WARN: 'warn'
+  WARN: 'warn',
 }
 
 module.exports = {
   env: {
     browser: true,
     es2021: true,
-    node: true
+    node: true,
   },
-  extends: ['plugin:react/recommended', 'standard'],
+  extends: ['plugin:react/recommended', 'standard', 'prettier'],
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: 'latest',
-    sourceType: 'module'
+    sourceType: 'module',
   },
   plugins: ['react'],
   rules: {
     'react/prop-types': RULES.OFF,
     'react/react-in-jsx-scope': RULES.OFF,
-    'no-unused-vars': RULES.WARN
-  }
+    'no-unused-vars': RULES.WARN,
+    'string/single-quotes': RULES.OFF,
+  },
 }
