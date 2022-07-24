@@ -1,10 +1,11 @@
+import styles from './styles.module.scss';
+
 const Layout = ({children}) => {
   return (
-    <div>
-      <main>
-        {children}
-      </main>
-    </div>
+    <main className={styles.main}>
+      {children}
+    </main>
+  
   );
 }
 

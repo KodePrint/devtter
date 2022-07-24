@@ -1,5 +1,6 @@
 import { UserCtxProvider } from 'context/UserContext'
-import '../styles/globals.css'
+import 'styles/resetStyles.scss'
+import 'styles/global.scss'
 
 function MyApp({ Component, pageProps }) {
   return(

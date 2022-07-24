@@ -1,0 +1,30 @@
+@use './_vars' as v;
+
+.section {
+  display: grid;
+  min-height: 100%;
+  width: 100%;
+  place-content: center;
+  place-items: center;
+
+  & > div {
+    margin-top: 1.6rem;
+
+    img {
+      width: 12rem;
+    }
+  }
+
+  & > h1 {
+    color: v.$secondary;
+    font-weight: 800;
+    font-size: 6.4rem;
+    margin-bottom: 2.1rem;
+  }
+  & > h2 {
+    color: v.$primary;
+    font-size: 1.8rem;
+    margin: 0;
+    text-align: center;
+  }
+}
