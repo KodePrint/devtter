@@ -1,12 +1,7 @@
-import styles from './styles.module.scss';
+import styles from './styles.module.scss'
 
-const Layout = ({children}) => {
-  return (
-    <main className={styles.main}>
-      {children}
-    </main>
-  
-  );
+const Layout = ({ children }) => {
+  return <main className={styles.main}>{children}</main>
 }
 
-export default Layout;
+export default Layout

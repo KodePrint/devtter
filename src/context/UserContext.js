@@ -1,10 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from 'react'
 
-export const UserCtx = React.createContext({});
+export const UserCtx = React.createContext({})
 
-export const UserCtxProvider = ({children}) => {
-  const [user, setUser] = useState(undefined);
-  const [session, setSession] = useState(undefined);
+export const UserCtxProvider = ({ children }) => {
+  const [user, setUser] = useState(undefined)
+  const [session, setSession] = useState(undefined)
 
-  return <UserCtx.Provider value={{user, setUser, session, setSession}}>{children}</UserCtx.Provider>;
+  return (
+    <UserCtx.Provider value={{ user, setUser, session, setSession }}>
+      {children}
+    </UserCtx.Provider>
+  )
 }

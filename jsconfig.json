@@ -8,7 +8,7 @@
       "@templates": ["templates"],
       "@styles": ["styles"],
       "@context": ["context"],
-      "@hooks": ["hooks"],
-    },
-  },
+      "@hooks": ["hooks"]
+    }
+  }
 }

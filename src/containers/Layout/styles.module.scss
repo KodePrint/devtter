@@ -1,7 +1,7 @@
-@use '../../styles/_vars.scss' as v;
-@use 'sass:map';
+@use "../../styles/_vars.scss" as v;
+@use "sass:map";
 
-$breakpoint: map.get(v.$breackpoints , 'sm');
+$breakpoint: map.get(v.$breackpoints, "sm");
 
 .main {
   background: v.$white;
