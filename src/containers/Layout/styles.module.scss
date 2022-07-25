@@ -11,6 +11,7 @@ $breakpoint: map.get(v.$breackpoints, "sm");
   width: 100%;
   transition: all 0.3s ease;
   position: relative;
+  overflow-y: auto;
 }
 
 @media (min-width: $breakpoint) {

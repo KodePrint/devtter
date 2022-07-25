@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 // Import Components
 import { Github } from 'components/icons/Github'
 import Avatar from 'components/Avatar'
@@ -11,12 +12,23 @@ import { useUserCtx } from 'hooks/useUserCtx'
 
 // Import Styles
 import styles from 'styles/index.module.scss'
+import { useEffect } from 'react'
+import Loader from 'components/Loader'
+import { supabase } from 'supabase/client'
 
 export default function Home() {
-  const { user, session } = useUserCtx()
+  const router = useRouter()
+  const { user } = useUserCtx()
+
+  const handleLoginWithGithub = async () => {
+    await supabase.auth.signIn({ provider: 'github' })
+  }
+
+  useEffect(() => {
+    user && router.replace('/home')
+  }, [user])
 
   console.log(user)
-  console.log(session)
 
   return (
     <>
@@ -33,12 +45,12 @@ export default function Home() {
           </h2>
           <div>
             {user === null && (
-              <Button onClick={() => alert('GithubLogin')}>
+              <Button onClick={handleLoginWithGithub}>
                 <Github fill="#fdfdfd" width={24} height={24} />
                 Login with Github
               </Button>
             )}
-            {user && user.avatar_url && (
+            {/* {user && user.avatar_url && (
               <div>
                 <Avatar
                   src={user.avatar_url}
@@ -47,7 +59,9 @@ export default function Home() {
                   withText
                 />
               </div>
-            )}
+            )} */}
+
+            {user === undefined && <Loader />}
           </div>
         </section>
       </Layout>
