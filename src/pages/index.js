@@ -15,20 +15,18 @@ import styles from 'styles/index.module.scss'
 import { useEffect } from 'react'
 import Loader from 'components/Loader'
 import { supabase } from 'supabase/client'
+import { loginWithGithub } from 'supabase/utils'
+import LogoutBtn from 'components/LogoutBtn'
 
 export default function Home() {
   const router = useRouter()
-  const { user } = useUserCtx()
+  const { user, loginWithGithub } = useUserCtx()
 
-  const handleLoginWithGithub = async () => {
-    await supabase.auth.signIn({ provider: 'github' })
+  const halndleLogin = async () => {
+    const user = await loginWithGithub()
   }
 
-  useEffect(() => {
-    user && router.replace('/home')
-  }, [user])
-
-  console.log(user)
+  // console.log(user)
 
   return (
     <>
@@ -45,12 +43,12 @@ export default function Home() {
           </h2>
           <div>
             {user === null && (
-              <Button onClick={handleLoginWithGithub}>
+              <Button onClick={halndleLogin}>
                 <Github fill="#fdfdfd" width={24} height={24} />
                 Login with Github
               </Button>
             )}
-            {/* {user && user.avatar_url && (
+            {user && user.avatar_url && (
               <div>
                 <Avatar
                   src={user.avatar_url}
@@ -58,8 +56,9 @@ export default function Home() {
                   text={user.user_name}
                   withText
                 />
+                <LogoutBtn />
               </div>
-            )} */}
+            )}
 
             {user === undefined && <Loader />}
           </div>

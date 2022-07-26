@@ -3,12 +3,13 @@
 .container {
   display: flex;
   align-items: center;
-  width: max-content;
+  width: 100%;
 }
 .avatar {
   border-radius: 99.99rem;
   height: 4.9rem;
   width: 4.9rem;
+  min-width: 4.9rem;
   background: rgba(v.$black, .3);
 }
 

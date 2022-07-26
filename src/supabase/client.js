@@ -10,23 +10,23 @@ export const authStateUser = () => {
   if (!user) {
     return {
       user: null,
-      session: false
+      session: false,
     }
   }
   supabase.auth.onAuthStateChange((event, session) => {
     if (event !== 'SIGNED_IN') {
       return {
         user: null,
-        session: false
+        session: false,
       }
     }
     return {
       user: session.user.user_metadata,
-      session: true
+      session: true,
     }
   })
   return {
     user: user.user_metadata,
-    session: true
+    session: true,
   }
 }
