@@ -1,20 +1,42 @@
 import { useContext, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { UserCtx } from 'context/UserContext'
-import { authStateUser } from '../supabase/client'
+import { authStateUser, supabase } from '../supabase/client'
 
 export const useUserCtx = () => {
-  const { user, setUser, session, setSession } = useContext(UserCtx)
+  const { authUser, setAuthUser } = useContext(UserCtx)
+  const router = useRouter()
 
-  const { user: authUser, session: authSession } = authStateUser()
+  // const user = JSON.parse(window.localStorage.getItem('supabase.auth.token'))
+  // const user = authStateUser()
 
   useEffect(() => {
-    if (!authSession) {
-      setUser(null)
-      setSession(null)
-    }
-    setUser(authUser)
-    setSession(authSession)
-  }, [user, session, authSession, authUser, setUser, setSession])
+    checkAuth()
+    window.addEventListener('hashchange', () => {
+      checkAuth()
+    })
+  }, [authUser])
 
-  return { user, session }
+  const checkAuth = async () => {
+    const user = supabase.auth.user()?.user_metadata
+
+    if (user) {
+      setAuthUser(user)
+      router.pathname === '/' && router.push('/home')
+    } else {
+      setAuthUser(null)
+    }
+  }
+
+  const signInWithGithub = async () => {
+    supabase.auth.signIn({ provider: 'github' })
+  }
+
+  const signOut = async () => {
+    supabase.auth.signOut()
+    setAuthUser(null)
+    router.replace('/')
+  }
+
+  return { authUser, setAuthUser, signInWithGithub, signOut }
 }

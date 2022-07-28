@@ -1,21 +1,38 @@
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+
+// Import Custom Hooks
+import { useUserCtx } from 'hooks/useUserCtx'
+
 import Layout from 'containers/Layout'
 import Devit from 'components/Devit'
+import { logout } from '../../supabase/client'
+import Avatar from 'components/Avatar'
 
 const HomePage = () => {
+  const { authUser, signOut } = useUserCtx()
   const [timeline, setTimeline] = useState([])
+  const router = useRouter()
 
   useEffect(() => {
-    fetch('/api/statuses/home_timeline')
-      .then((res) => res.json())
-      .then(setTimeline)
-  }, [])
+    authUser &&
+      authUser.avatar_url &&
+      fetch('/api/statuses/home_timeline')
+        .then((res) => res.json())
+        .then(setTimeline)
+  }, [authUser])
 
   return (
     <>
       <Layout>
         <header>
-          <h2>Inicio</h2>
+          <div>
+            <button>
+              <Avatar src={authUser?.avatar_url} width={3.5} height={3.5} />
+            </button>
+            <h2>Inicio</h2>
+          </div>
+          <button onClick={signOut}>Logout</button>
         </header>
 
         <section>
@@ -42,8 +59,17 @@ const HomePage = () => {
           backdrop-filter: blur(0.5rem);
           height: 4.9rem;
           position: sticky;
+          justify-content: space-between;
           width: 100%;
+          padding: 1rem 1.5rem;
           top: 0;
+        }
+        div {
+          display: flex;
+          align-items: center;
+        }
+        button {
+          cursor: pointer;
         }
         nav {
           bottom: 0;
@@ -54,7 +80,7 @@ const HomePage = () => {
           background: #fff;
         }
         h2 {
-          font-size: 2.1rem;
+          font-size: 1.6rem;
           font-weight: 800;
           padding-left: 1.5rem;
         }
