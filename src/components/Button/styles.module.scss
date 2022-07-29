@@ -12,6 +12,7 @@
   min-height:3rem;
   max-height: 3.5rem;
   padding: 1.5rem;
+  user-select: none;
   transition: opacity 0.3s ease;
 
   &:hover {
@@ -19,8 +20,8 @@
   }
 
   & > svg {
-    height: 2.8rem;
-    width: 2.8rem;
+    height: 2.2rem;
+    width: 2.2rem;
     margin-right: 0.8rem;
   }
 }

@@ -34,7 +34,7 @@ export default function Home() {
           <div>
             {authUser === USER_STATES.NOT_LOGGED && (
               <Button onClick={signInWithGithub}>
-                <Github fill="#fdfdfd" width={24} height={24} />
+                <Github fill="#fdfdfd" />
                 Login with Github
               </Button>
             )}

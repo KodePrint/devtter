@@ -6,8 +6,9 @@ import { useUserCtx, USER_STATES } from 'hooks/useUserCtx'
 
 import Layout from 'containers/Layout'
 import Devit from 'components/Devit'
-import { logout } from '../../supabase/client'
+import { fetchLatestDevits } from '../../supabase/client'
 import Avatar from 'components/Avatar'
+import DevitBtn from 'components/UI/DevitBtn'
 
 const HomePage = () => {
   const { authUser, signOut } = useUserCtx()
@@ -19,11 +20,10 @@ const HomePage = () => {
   }, [authUser])
 
   useEffect(() => {
-    authUser &&
-      authUser.avatar_url &&
-      fetch('/api/statuses/home_timeline')
-        .then((res) => res.json())
-        .then(setTimeline)
+    authUser && authUser.avatar_url && fetchLatestDevits().then(setTimeline)
+    // fetch('/api/statuses/home_timeline')
+    //   .then((res) => res.json())
+    //   .then(setTimeline)
   }, [authUser])
 
   return (
@@ -40,16 +40,29 @@ const HomePage = () => {
         </header>
 
         <section>
-          {timeline.map(({ id, avatar, username, message }) => {
-            return (
-              <Devit
-                key={id}
-                avatar={avatar}
-                username={username}
-                message={message}
-              />
-            )
-          })}
+          {timeline.map(
+            ({
+              id,
+              createdAt,
+              avatar,
+              userName,
+              content,
+              likesCount,
+              sharedCount,
+            }) => {
+              return (
+                <Devit
+                  key={id}
+                  avatar={avatar}
+                  userName={userName}
+                  content={content}
+                  createdAt={createdAt}
+                  sharedCount={sharedCount}
+                  likesCount={likesCount}
+                />
+              )
+            }
+          )}
         </section>
 
         <nav></nav>
@@ -69,7 +82,7 @@ const HomePage = () => {
           padding: 1rem 1.5rem;
           top: 0;
         }
-        div {
+        header > div {
           display: flex;
           align-items: center;
         }

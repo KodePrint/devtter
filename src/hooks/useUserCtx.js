@@ -24,10 +24,14 @@ export const useUserCtx = () => {
 
   const checkAuth = async () => {
     setAuthUser(undefined)
-    const user = supabase.auth.user()?.user_metadata
+    const user = supabase.auth.user()
 
     if (user) {
-      setAuthUser(user)
+      const userData = {
+        id: user.id,
+        ...user.user_metadata,
+      }
+      setAuthUser(userData)
       router.pathname === '/' && router.replace('/home')
     } else {
       setAuthUser(null)
