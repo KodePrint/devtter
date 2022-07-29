@@ -12,21 +12,15 @@ import { useUserCtx } from 'hooks/useUserCtx'
 
 // Import Styles
 import styles from 'styles/index.module.scss'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Loader from 'components/Loader'
-import { supabase } from 'supabase/client'
-import { loginWithGithub } from 'supabase/utils'
-import LogoutBtn from 'components/LogoutBtn'
 
 export default function Home() {
-  const router = useRouter()
-  const { user, loginWithGithub } = useUserCtx()
-
-  const halndleLogin = async () => {
-    const user = await loginWithGithub()
+  const USER_STATES = {
+    NOT_LOGGED: null,
+    NOT_KNOWN: undefined,
   }
-
-  // console.log(user)
+  const { authUser, setAuthUser, signInWithGithub } = useUserCtx()
 
   return (
     <>
@@ -42,25 +36,25 @@ export default function Home() {
             Talk about develpment <br /> with developers 👨‍💻💻🖥👩‍💻
           </h2>
           <div>
-            {user === null && (
-              <Button onClick={halndleLogin}>
+            {authUser === USER_STATES.NOT_LOGGED && (
+              <Button onClick={signInWithGithub}>
                 <Github fill="#fdfdfd" width={24} height={24} />
                 Login with Github
               </Button>
             )}
-            {user && user.avatar_url && (
+            {/* {authUser && authUser.avatar_url && (
               <div>
                 <Avatar
-                  src={user.avatar_url}
-                  alt={user.user_name}
-                  text={user.user_name}
+                  src={authUser.avatar_url}
+                  alt={authUser.user_name}
+                  text={authUser.user_name}
                   withText
                 />
                 <LogoutBtn />
               </div>
-            )}
+            )} */}
 
-            {user === undefined && <Loader />}
+            {authUser === USER_STATES.NOT_KNOWN && <Loader />}
           </div>
         </section>
       </Layout>

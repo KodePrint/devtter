@@ -1,28 +1,49 @@
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+
+// Import Custom Hooks
+import { useUserCtx } from 'hooks/useUserCtx'
+
 import Layout from 'containers/Layout'
 import Devit from 'components/Devit'
+<<<<<<< HEAD
 import LogoutBtn from 'components/LogoutBtn'
 import { useUserCtx } from 'hooks/useUserCtx'
+=======
+import { logout } from '../../supabase/client'
+>>>>>>> origin/login
 import Avatar from 'components/Avatar'
 
 const HomePage = () => {
+  const { authUser, signOut } = useUserCtx()
   const [timeline, setTimeline] = useState([])
+  const router = useRouter()
 
   const { user } = useUserCtx()
   console.log(user)
 
   useEffect(() => {
+<<<<<<< HEAD
     user &&
       fetch('/api/statuses/home_timeline')
         .then((res) => res.json())
         .then(setTimeline)
   }, [user])
+=======
+    authUser &&
+      authUser.avatar_url &&
+      fetch('/api/statuses/home_timeline')
+        .then((res) => res.json())
+        .then(setTimeline)
+  }, [authUser])
+>>>>>>> origin/login
 
   return (
     <>
       <Layout>
         <header>
           <div>
+<<<<<<< HEAD
             {user && user.avatar_url && (
               <Avatar
                 alt="Inicio"
@@ -33,6 +54,14 @@ const HomePage = () => {
             )}
           </div>
           <LogoutBtn />
+=======
+            <button>
+              <Avatar src={authUser?.avatar_url} width={3.5} height={3.5} />
+            </button>
+            <h2>Inicio</h2>
+          </div>
+          <button onClick={signOut}>Logout</button>
+>>>>>>> origin/login
         </header>
 
         <section>
@@ -60,11 +89,25 @@ const HomePage = () => {
           backdrop-filter: blur(0.5rem);
           height: 4.9rem;
           position: sticky;
+<<<<<<< HEAD
           padding: 0.6rem 1.5rem;
           top: 0;
         }
         div {
           width: 100%;
+=======
+          justify-content: space-between;
+          width: 100%;
+          padding: 1rem 1.5rem;
+          top: 0;
+        }
+        div {
+          display: flex;
+          align-items: center;
+        }
+        button {
+          cursor: pointer;
+>>>>>>> origin/login
         }
         nav {
           bottom: 0;
@@ -75,7 +118,7 @@ const HomePage = () => {
           background: #fff;
         }
         h2 {
-          font-size: 2.1rem;
+          font-size: 1.6rem;
           font-weight: 800;
         }
         section {

@@ -1,24 +1,24 @@
 import Avatar from 'components/Avatar'
 import Button from 'components/Button'
 import Layout from 'containers/Layout'
+import { useRouter } from 'next/router'
+
+// Import Custom Hooks
 import { useUserCtx } from 'hooks/useUserCtx'
 
 const ComposeTweet = () => {
-  const { user } = useUserCtx()
-
-  // console.log(user)
+  const { authUser } = useUserCtx()
+  const router = useRouter()
 
   return (
     <>
       <Layout>
         <header>
-          <button>Cancelar</button>
+          <button onClick={router.back}>Back</button>
           <Button>Devittear</Button>
         </header>
         <section>
-          <div>
-            <Avatar src={user.avatar_url} />
-          </div>
+          <Avatar src={authUser?.avatar_url} />
           <form>
             <textarea placeholder="¿Que esta pasando?"></textarea>
           </form>
@@ -30,27 +30,20 @@ const ComposeTweet = () => {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0.6rem 1.5rem;
+          padding: 0 1.5rem;
+          height: 4.9rem;
         }
         section {
           display: flex;
-          padding: 0.6rem 1.5rem;
+          padding: 1.5rem;
           align-items: flex-start;
-          width: 100%;
-        }
-        div {
-          min-width: 4.9rem;
-          margin-right: 1.2rem;
-        }
-        form {
-          width: 100%;
         }
         textarea {
           width: 100%;
           border: 0;
           min-height: 20rem;
           resize: none;
-          padding: 1.2rem 0.6rem;
+          font-size: 1.8rem;
           outline: 0;
         }
       `}</style>
