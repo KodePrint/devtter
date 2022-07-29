@@ -1,7 +1,13 @@
 import { useContext, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { UserCtx } from 'context/UserContext'
-import { authStateUser, supabase } from '../supabase/client'
+import { supabase } from '../supabase/client'
+
+export const USER_STATES = {
+  NOT_LOGGED: null,
+  NOT_KNOWN: undefined,
+}
+
 export const useUserCtx = () => {
   const { authUser, setAuthUser } = useContext(UserCtx)
   const router = useRouter()
@@ -14,14 +20,15 @@ export const useUserCtx = () => {
     window.addEventListener('hashchange', () => {
       checkAuth()
     })
-  }, [authUser])
+  }, [])
 
   const checkAuth = async () => {
+    setAuthUser(undefined)
     const user = supabase.auth.user()?.user_metadata
 
     if (user) {
       setAuthUser(user)
-      router.pathname === '/' && router.push('/home')
+      router.pathname === '/' && router.replace('/home')
     } else {
       setAuthUser(null)
     }

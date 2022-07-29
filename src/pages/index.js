@@ -8,7 +8,7 @@ import Button from 'components/Button'
 import Layout from 'containers/Layout'
 
 // Import Custom Hooks
-import { useUserCtx } from 'hooks/useUserCtx'
+import { USER_STATES, useUserCtx } from 'hooks/useUserCtx'
 
 // Import Styles
 import styles from 'styles/index.module.scss'
@@ -16,11 +16,7 @@ import { useEffect, useState } from 'react'
 import Loader from 'components/Loader'
 
 export default function Home() {
-  const USER_STATES = {
-    NOT_LOGGED: null,
-    NOT_KNOWN: undefined,
-  }
-  const { authUser, setAuthUser, signInWithGithub } = useUserCtx()
+  const { authUser, signInWithGithub } = useUserCtx()
 
   return (
     <>
